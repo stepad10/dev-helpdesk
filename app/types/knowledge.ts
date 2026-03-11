@@ -4,7 +4,7 @@ export interface KnowledgeDocument {
   content: string;
   tags: string[];
   last_updated: string;
-  status: 'current' | 'deprecated';
+  status: "current" | "deprecated";
 }
 
 export interface Expert {

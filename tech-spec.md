@@ -5,7 +5,8 @@
 A **React Router v7** (framework mode) full-stack application using **Vite** and the **Vercel AI SDK** with a provider-agnostic LLM integration (starting with Google Gemini). The system uses a **Naive RAG (Context Stuffing) approach** — the entire small knowledge base is loaded into memory and injected directly into the LLM's system prompt on every request. Package manager: **pnpm**.
 
 > **Architectural Decision Record (ADR): Why Naive RAG for the MVP?**
-> We deliberately chose *not* to implement a standard Vector Database / Chunking / Embedding pipeline for this initial prototype.
+> We deliberately chose _not_ to implement a standard Vector Database / Chunking / Embedding pipeline for this initial prototype.
+>
 > 1. **Data Size:** The provided `knowledge_data.json` contains only 6 documents and 5 experts. Modern LLM context windows (128k+ tokens) can handle this trivial amount of text flawlessly.
 > 2. **MVP Focus:** An MVP aims to validate the core hypothesis (will developers use a chat UI? can the LLM synthesize answers accurately and route to experts?) with the least amount of engineering effort. Building an embedding pipeline before validating the UX is premature optimization.
 > 3. **Perfect Retrieval:** Context stuffing avoids the common pitfalls of Top-K similarity searches, allowing the LLM's attention layers to evaluate the entire dataset natively.
@@ -49,15 +50,15 @@ flowchart TB
 
 ### Key Design Decisions
 
-| Decision            | Choice                                                       | Rationale                                                              |
-| ------------------- | ------------------------------------------------------------ | ---------------------------------------------------------------------- |
-| Retrieval approach  | Naive RAG (Context Stuffing)                                 | Simplest, fastest to build, 100% accurate for small datasets. MVP-focused. |
-| Conversation memory | Client-side (`useState`)                                     | Stateless server = simple, embeddable, no DB needed.                   |
-| LLM provider        | Provider-agnostic via Vercel AI SDK, starting with Gemini    | Swapping to OpenAI or Anthropic requires changing one import.          |
-| UI design           | Standalone single-page chat                                  | Works as a browser tab now; embeddable in Confluence via iframe later. |
-| API design          | Stateless resource route (`app/routes/api.chat.ts`)          | Full message history sent per request. No server sessions.             |
-| Framework           | React Router v7 (framework mode) + Vite                      | Modern, Vite-native, full-stack in one repo, familiar React model.     |
-| Package manager     | pnpm                                                         | Faster installs, stricter dependency resolution.                       |
+| Decision            | Choice                                                    | Rationale                                                                  |
+| ------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Retrieval approach  | Naive RAG (Context Stuffing)                              | Simplest, fastest to build, 100% accurate for small datasets. MVP-focused. |
+| Conversation memory | Client-side (`useState`)                                  | Stateless server = simple, embeddable, no DB needed.                       |
+| LLM provider        | Provider-agnostic via Vercel AI SDK, starting with Gemini | Swapping to OpenAI or Anthropic requires changing one import.              |
+| UI design           | Standalone single-page chat                               | Works as a browser tab now; embeddable in Confluence via iframe later.     |
+| API design          | Stateless resource route (`app/routes/api.chat.ts`)       | Full message history sent per request. No server sessions.                 |
+| Framework           | React Router v7 (framework mode) + Vite                   | Modern, Vite-native, full-stack in one repo, familiar React model.         |
+| Package manager     | pnpm                                                      | Faster installs, stricter dependency resolution.                           |
 
 ---
 
@@ -72,7 +73,7 @@ Because the dataset is small, the pipeline is extremely lightweight.
 
 2. **Query (per user message):**
    - A `POST` request arrives at `/api/chat` with the user's message history.
-   - The server takes the *entirety* of the in-memory documents and expert list.
+   - The server takes the _entirety_ of the in-memory documents and expert list.
    - It injects them directly into the system prompt.
    - The LLM processes the user's question against the full context and returns the answer.
 

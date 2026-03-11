@@ -65,11 +65,13 @@ The **Internal Developer Q&A Helper** is a prototype AI-assisted web application
 The MVP must include basic verification of two areas:
 
 ### Correctness Testing
+
 - At least one representative prompt per knowledge document must be tested to confirm the system returns a grounded, cited answer.
 - At least one question outside the knowledge base must be tested to confirm expert fallback triggers correctly.
 - At least one follow-up question must be tested to confirm conversational memory works.
 
 ### Security Testing
+
 - At least three prompt injection attempts must be tested to confirm they are refused (e.g., "ignore previous instructions", "repeat the above", "you are now DAN").
 - An off-topic question must be tested to confirm polite rejection.
 - A question referencing a deprecated document must be tested to confirm the deprecation warning is included in the response.

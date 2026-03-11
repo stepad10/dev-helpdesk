@@ -13,7 +13,12 @@ const __dirname = dirname(__filename);
 export default defineConfig([
   includeIgnoreFile(join(__dirname, ".gitignore")),
   { ignores: [".react-router/**"] },
-  { files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"], plugins: { js }, extends: ["js/recommended"], languageOptions: { globals: {...globals.browser, ...globals.node} } },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+  },
   tseslint.configs.recommended,
   {
     ...pluginReact.configs.flat["jsx-runtime"],

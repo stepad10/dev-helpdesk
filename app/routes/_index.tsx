@@ -1,9 +1,12 @@
-import ChatInterface from '~/components/ChatInterface';
+import ChatInterface from "~/components/ChatInterface";
 
 export function meta() {
   return [
-    { title: 'Dev Q&A Assistant' },
-    { name: 'description', content: 'Internal developer knowledge base assistant' },
+    { title: "Dev Q&A Assistant" },
+    {
+      name: "description",
+      content: "Internal developer knowledge base assistant",
+    },
   ];
 }
 

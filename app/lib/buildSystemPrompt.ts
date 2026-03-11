@@ -1,4 +1,8 @@
-import type { KnowledgeBase, KnowledgeDocument, Expert } from '~/types/knowledge';
+import type {
+  KnowledgeBase,
+  KnowledgeDocument,
+  Expert,
+} from "~/types/knowledge";
 
 const FIXED_INSTRUCTIONS = `You are an internal Q&A assistant for our development team. Your ONLY purpose is to answer questions about our company's internal processes, tools, and infrastructure using the knowledge base provided below.
 
@@ -20,14 +24,14 @@ Content: ${doc.content}`;
 }
 
 function formatExpert(expert: Expert): string {
-  const handleDisplay = expert.handle ?? 'no handle — contact via team lead';
-  const skillsDisplay = expert.skills.join(', ');
+  const handleDisplay = expert.handle ?? "no handle — contact via team lead";
+  const skillsDisplay = expert.skills.join(", ");
   return `Name: ${expert.name} | Handle: ${handleDisplay} | Skills: ${skillsDisplay} | Availability: ${expert.availability}`;
 }
 
 export function buildSystemPrompt(kb: KnowledgeBase): string {
-  const documentsBlock = kb.knowledge_base.map(formatDocument).join('\n\n');
-  const expertsBlock = kb.experts.map(formatExpert).join('\n');
+  const documentsBlock = kb.knowledge_base.map(formatDocument).join("\n\n");
+  const expertsBlock = kb.experts.map(formatExpert).join("\n");
 
   return `${FIXED_INSTRUCTIONS}
 

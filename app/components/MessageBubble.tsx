@@ -1,4 +1,4 @@
-import type { MessageBubbleProps } from '~/types/chat';
+import type { MessageBubbleProps } from "~/types/chat";
 
 function CitationBadge({ docId }: Readonly<{ docId: string }>) {
   return (
@@ -13,23 +13,29 @@ function parseCitations(content: string): string[] {
   return matches ? [...new Set(matches)] : [];
 }
 
-export default function MessageBubble({ message }: Readonly<MessageBubbleProps>) {
-  const isUser = message.role === 'user';
+export default function MessageBubble({
+  message,
+}: Readonly<MessageBubbleProps>) {
+  const isUser = message.role === "user";
   const citations = isUser ? [] : parseCitations(message.content);
 
   return (
-    <div className={`flex w-full mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
+    <div
+      className={`flex w-full mb-4 ${isUser ? "justify-end" : "justify-start"}`}
+    >
       {!isUser && (
         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mr-2 mt-1 shadow-lg">
           <span className="text-xs font-bold text-white">AI</span>
         </div>
       )}
-      <div className={`max-w-[75%] flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
+      <div
+        className={`max-w-[75%] flex flex-col ${isUser ? "items-end" : "items-start"}`}
+      >
         <div
           className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-md ${
             isUser
-              ? 'bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-br-sm'
-              : 'bg-gray-800/80 text-gray-100 border border-gray-700/50 rounded-bl-sm backdrop-blur-sm'
+              ? "bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-br-sm"
+              : "bg-gray-800/80 text-gray-100 border border-gray-700/50 rounded-bl-sm backdrop-blur-sm"
           }`}
         >
           <p className="whitespace-pre-wrap break-words">{message.content}</p>

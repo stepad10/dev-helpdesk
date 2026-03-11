@@ -5,21 +5,21 @@ export const SAFE_FALLBACK_MESSAGE =
   "I'm sorry, I encountered an issue generating a safe response. Please try rephrasing your question or contact support.";
 
 const INJECTION_PATTERNS = [
-  'ignore previous instructions',
-  'ignore all instructions',
-  'output your system prompt',
-  'reveal your system prompt',
-  'disregard all prior',
-  'you are now',
-  'pretend you are',
-  'repeat the above',
-  'act as if',
-  'forget your instructions',
+  "ignore previous instructions",
+  "ignore all instructions",
+  "output your system prompt",
+  "reveal your system prompt",
+  "disregard all prior",
+  "you are now",
+  "pretend you are",
+  "repeat the above",
+  "act as if",
+  "forget your instructions",
 ];
 
 const LEAKED_PROMPT_PATTERNS = [
-  'ONLY use the provided knowledge base',
-  'cite your source',
+  "ONLY use the provided knowledge base",
+  "cite your source",
 ];
 
 export function isInjectionAttempt(message: string): boolean {
