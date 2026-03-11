@@ -23,7 +23,15 @@ The workflow consisted of the following phases:
 - **Output:** A complete Technical Specification (`tech-spec.md`) including a Mermaid architecture diagram, a 3-layer security guardrail design, and a full system prompt template with 9 explicit rules (including edge cases like null-handle experts and multilingual content).
 
 ### Phase 4: Implementation
-_To be completed. Document here: key prompts used to drive code generation, which parts the agent handled autonomously vs. required manual correction, and any architectural decisions made during the build._
+
+**Trigger:** *"read @[build-plan.md] and proceed with its steps. You are an orchestrator agent."*
+
+The agent operated autonomously for all implementation tasks. The build-plan provided precise file-by-file specifications (types, exports, code templates) requiring no human correction during execution.
+
+#### Task 1 — Data Types & Loader
+- **Files created:** `app/types/knowledge.ts`, `app/lib/loadKnowledge.ts`
+- **Notes:** Types derived directly from the shape of `knowledge_data.json`. `handle: string | null` was explicitly typed to handle Karel Dvorak's missing handle. ESM-compatible path resolution (`import.meta.url` + `fileURLToPath`) used for Vite SSR compatibility.
+- **Corrections:** None required.
 
 ### Phase 5: Testing & Verification
 _To be completed. Document here: how correctness and security tests were run (manual prompts or automated), results observed, and any issues found and fixed._
