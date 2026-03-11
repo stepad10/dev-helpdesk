@@ -33,6 +33,11 @@ The agent operated autonomously for all implementation tasks. The build-plan pro
 - **Notes:** Types derived directly from the shape of `knowledge_data.json`. `handle: string | null` was explicitly typed to handle Karel Dvorak's missing handle. ESM-compatible path resolution (`import.meta.url` + `fileURLToPath`) used for Vite SSR compatibility.
 - **Corrections:** None required.
 
+#### Task 2 — Security Utility Functions
+- **Files created:** `app/lib/security.ts`
+- **Notes:** `isInjectionAttempt` checks 10 known injection phrases (case-insensitive). `containsLeakedPrompt` checks for distinctive system prompt fragments. Canned `REFUSAL_MESSAGE` and `SAFE_FALLBACK_MESSAGE` constants exported. Normal doc citation patterns (e.g. `DOC-001`) not flagged.
+- **Corrections:** None required.
+
 ### Phase 5: Testing & Verification
 _To be completed. Document here: how correctness and security tests were run (manual prompts or automated), results observed, and any issues found and fixed._
 
