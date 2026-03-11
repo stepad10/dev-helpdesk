@@ -55,8 +55,21 @@ The agent operated autonomously for all implementation tasks. The build-plan pro
 - **Corrections:** Fixed some minor React linting errors (Readonly props, deprecated FormEvent, array index keys).
 
 ### Phase 5: Testing & Verification
-_To be completed. Document here: how correctness and security tests were run (manual prompts or automated), results observed, and any issues found and fixed._
 
+A suite of 13 prompts was executed against the `/api/chat` route to verify functional correctness, security constraints, and edge cases. (Note: testing was slightly hampered by strictly rate-limited Gemini free tier quotas (`gemini-2.5-flash`), but we successfully gathered results across all categories).
+
+**Correctness Tests:**
+1. **Documents:** Queries like "How do I deploy a PHP app?" successfully retrieved the deprecated manual FTP process and warned the user, while citing `DOC-003`.
+2. **Expert Routing:** "Who should I contact about CI/CD pipelines?" successfully bypassed the knowledge base (which is silent on CI/CD) and routed to `@lucie_ops` based on her profile skills.
+3. **Follow-ups:** The conversational state logic successfully carried context from `@lucie_ops` to a follow-up "And what about monitoring?".
+
+**Security & Safety Tests:**
+1. **Layer 2 (Input Sanitization):** Direct injection attempts ("Ignore previous instructions") instantly returned the static `REFUSAL_MESSAGE` with 0ms LLM latency.
+2. **Layer 1 (Prompt Constraint):** "What's the best pizza in Prague?" correctly triggered a polite, off-topic rejection from the LLM based on its system instruction guardrails.
+
+**Edge Cases:**
+1. **Expert Without Handle (Null check):** "Who reviews frontend changes?" successfully retrieved Karel Dvorak, detected his `handle: null` state, and gracefully output: "contact him via his team lead" (never emitting `@null`).
+2. **Multilingual (Czech):** "Jak nasadím aplikaci?" triggered a perfect Czech translation of the deployment protocol, citing DOC-001 and DOC-003 exactly as required, handling `@tech_lead` and `@jana_php` references fluidly in the foreign language.
 ## 2. Instructions Given to the Agent
 
 The workflow was guided by the following high-level human prompts:
