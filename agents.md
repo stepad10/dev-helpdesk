@@ -38,6 +38,11 @@ The agent operated autonomously for all implementation tasks. The build-plan pro
 - **Notes:** `isInjectionAttempt` checks 10 known injection phrases (case-insensitive). `containsLeakedPrompt` checks for distinctive system prompt fragments. Canned `REFUSAL_MESSAGE` and `SAFE_FALLBACK_MESSAGE` constants exported. Normal doc citation patterns (e.g. `DOC-001`) not flagged.
 - **Corrections:** None required.
 
+#### Task 3 — System Prompt Builder
+- **Files created:** `app/lib/buildSystemPrompt.ts`
+- **Notes:** All 9 rules from `tech-spec.md §4` embedded verbatim. Knowledge documents serialized as `[DOC-XXX] Topic: ... | Status: ... | Content: ...` blocks. Experts serialized with null-handle guard: Karel Dvorak outputs `no handle — contact via team lead` instead of `@null`. Manual verification script confirmed: all 6 DOC IDs present, all 5 expert names present, `"contact via team lead"` present, `"@null"` absent.
+- **Corrections:** None required.
+
 ### Phase 5: Testing & Verification
 _To be completed. Document here: how correctness and security tests were run (manual prompts or automated), results observed, and any issues found and fixed._
 
