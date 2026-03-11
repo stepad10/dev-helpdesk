@@ -43,6 +43,17 @@ The agent operated autonomously for all implementation tasks. The build-plan pro
 - **Notes:** All 9 rules from `tech-spec.md §4` embedded verbatim. Knowledge documents serialized as `[DOC-XXX] Topic: ... | Status: ... | Content: ...` blocks. Experts serialized with null-handle guard: Karel Dvorak outputs `no handle — contact via team lead` instead of `@null`. Manual verification script confirmed: all 6 DOC IDs present, all 5 expert names present, `"contact via team lead"` present, `"@null"` absent.
 - **Corrections:** None required.
 
+#### Task 4 — API Resource Route `api.chat`
+- **Files created:** `app/routes/api.chat.ts`
+- **Notes:** Implemented 3-layer security logic. Added endpoint to `app/routes.ts` because React Router v7 framework mode requires explicit routing registration unless auto-routing is set up exactly right. Shifted model to `gemini-2.5-flash` due to free tier quota limitations on `gemini-2.0-flash`.
+- **Corrections:** Had to manually register the route in `routes.ts`. Handled a syntax error (extra bracket). Handled API quota limits by checking available models and updating the model name string.
+
+#### Task 5 — Chat UI
+- **Files created:** `app/types/chat.ts`, `app/components/ChatInterface.tsx`, `app/components/MessageBubble.tsx`
+- **Files modified:** `app/routes/_index.tsx`
+- **Notes:** Styled with Tailwind CSS dark glassmorphism. Handled citation badges dynamically checking for `DOC-XXX`. Message state handled nicely via `useState`.
+- **Corrections:** Fixed some minor React linting errors (Readonly props, deprecated FormEvent, array index keys).
+
 ### Phase 5: Testing & Verification
 _To be completed. Document here: how correctness and security tests were run (manual prompts or automated), results observed, and any issues found and fixed._
 
