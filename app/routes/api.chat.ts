@@ -29,7 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     // generateText (not streamText) so Layer 3 can inspect the full response before sending
     const { text } = await generateText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-3-flash-preview"),
       system: systemPrompt,
       messages,
     });
@@ -43,7 +43,10 @@ export async function action({ request }: ActionFunctionArgs) {
     }
 
     return Response.json({ role: "assistant", content: text });
-  } catch {
-    return Response.json({ error: "Internal error" }, { status: 500 });
+  } catch (error) {
+    console.error("API Route Error:", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown internal error";
+    return Response.json({ error: errorMessage }, { status: 500 });
   }
 }

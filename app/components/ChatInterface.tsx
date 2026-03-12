@@ -161,13 +161,12 @@ export default function ChatInterface() {
         )}
       </div>
 
-      {/* Input area */}
       <div className="flex-shrink-0 px-4 py-4 border-t border-gray-800/60 bg-gray-900/60 backdrop-blur-md">
         <form
           onSubmit={handleSubmit}
-          className="flex gap-3 items-end max-w-4xl mx-auto"
+          className="flex gap-3 items-center max-w-4xl mx-auto"
         >
-          <div className="flex-1 relative">
+          <div className="flex-1 relative flex">
             <textarea
               id="chat-input"
               ref={inputRef}
@@ -177,7 +176,7 @@ export default function ChatInterface() {
               placeholder="Ask about deployments, CI/CD, database, or who to contact..."
               rows={1}
               disabled={isLoading}
-              className="w-full resize-none bg-gray-800/80 border border-gray-700/60 rounded-xl px-4 py-3 pr-12 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed leading-relaxed"
+              className="w-full block h-10 resize-none bg-gray-800/80 border border-gray-700/60 rounded-xl px-4 py-2 pr-12 text-[15px] text-gray-100 placeholder-gray-500 focus:outline-none focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/30 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed leading-relaxed"
               style={{
                 maxHeight: "160px",
                 overflow: "auto",
