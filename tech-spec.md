@@ -21,7 +21,7 @@ flowchart TB
 
     UI -- "POST /api/chat\n{ messages: [...] }" --> Input
 
-    subgraph Server["Next.js Server"]
+    subgraph Server["React Router v7 Server"]
         Input[Layer 2: Input Sanitization]
         Input -- blocked --> Refusal[Canned Refusal Response]
         Input -- clean --> Inject

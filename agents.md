@@ -10,7 +10,7 @@ The workflow consisted of the following phases:
 
 - **Input:** The initial assignment description (`description-en.md`) and data export (`knowledge_data.json`).
 - **Action:** The agent analyzed the business request to extract core functional and non-functional requirements.
-- **Output:** A formal Business Ticket Specification (`ticket_specification.md`) was generated to clarify the scope, defining acceptance criteria and identifying edge cases (e.g., prompt injection, handling deprecated info, expert availability).
+- **Output:** A formal Business Ticket Specification (`product-spec.md`) was generated to clarify the scope, defining acceptance criteria and identifying edge cases (e.g., prompt injection, handling deprecated info, expert availability).
 - **Refinement:** The agent proactively identified missing information (authentication needs, DB read/write state, Confluence integration priority) and prompted the human product owner for decisions.
 
 ### Phase 2: Architecture & Technology Selection
@@ -52,7 +52,7 @@ The agent operated autonomously for all implementation tasks. The build-plan pro
 #### Task 4 — API Resource Route `api.chat`
 
 - **Files created:** `app/routes/api.chat.ts`
-- **Notes:** Implemented 3-layer security logic. Added endpoint to `app/routes.ts` because React Router v7 framework mode requires explicit routing registration unless auto-routing is set up exactly right. Shifted model to `gemini-2.5-flash` due to free tier quota limitations on `gemini-2.0-flash`.
+- **Notes:** Implemented 3-layer security logic. Added endpoint to `app/routes.ts` because React Router v7 framework mode requires explicit routing registration unless auto-routing is set up exactly right. Shifted model to `gemini-3-flash-preview` due to free tier quota limitations on earlier Gemini models.
 - **Corrections:** Had to manually register the route in `routes.ts`. Handled a syntax error (extra bracket). Handled API quota limits by checking available models and updating the model name string.
 
 #### Task 5 — Chat UI
@@ -91,7 +91,7 @@ The workflow was guided by the following high-level human prompts:
 3. **Architecture Decision:** _"lets go with option 1. Mark the reasoning behind it somewhere. save this spec to product-spec.md"_
 4. **Technical Specification:** _"check @[product-spec.md] and @[tech-spec.md] — check if the approach is industry standard and if it is idiomatic. fix [the gaps]."_
 
-From these high-level directives, the agent autonomously handled the formatting, structure, technical evaluation, file creation, and gap analysis. Add prompts for Phases 4 and 5 here as implementation progresses.
+From these high-level directives, the agent autonomously handled the formatting, structure, technical evaluation, file creation, and gap analysis.
 
 ## 3. Architecture Approach
 
@@ -103,7 +103,7 @@ We are building a **Naive RAG (Retrieval-Augmented Generation) Chat Application*
 - **Build Tool:** Vite
 - **Language:** TypeScript
 - **UI:** React, Tailwind CSS
-- **AI Integration:** Vercel AI SDK (`ai` package) with `@ai-sdk/google` (Gemini); provider-agnostic — swapping to OpenAI or Anthropic requires changing one import
+- **AI Integration:** Vercel AI SDK (`ai` package) with `@ai-sdk/google` (Gemini) and `@ai-sdk/openai` (GPT-4o-mini); provider-agnostic — swapping to Anthropic or other providers requires changing one import
 - **Package Manager:** pnpm
 - **Data Source:** Static filesystem read of `app/data/knowledge_data.json`
 

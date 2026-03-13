@@ -14,7 +14,9 @@ A proof-of-concept AI orchestration tool acting as a company's internal develope
 
 - **Node.js**: v18 or newer
 - **pnpm**: `npm install -g pnpm`
-- **Google Gemini API Key**: Get one for free from [Google AI Studio](https://aistudio.google.com/app/apikey).
+- **AI Provider API Key**: At least one of:
+  - **Google Gemini** (default): Get a free key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+  - **OpenAI**: Get a key from [OpenAI Platform](https://platform.openai.com/api-keys).
 
 ## Setup & Running Locally
 
